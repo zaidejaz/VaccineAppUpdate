@@ -51,42 +51,48 @@ def upload_profile_pic(request):
         # Render the HTML form
         return render(request, 'user/accounts/upload_profile_pic.html')
     
+@login_required
 def profile(request, id):
-    # Retrieve the user based on the provided ID
+    # Get the user data
     user_data = User.objects.get(id=id)
 
-    # Retrieve the user's posts
+    # Get the user's posts
     user_posts = Post.objects.filter(author=user_data)
 
-    # Retrieve the list of followers (users who follow the current user)
-    followers = user_data.followers.all()
+    # Calculate the follower count and following count
+    follower_count = Follower.objects.filter(user=user_data).count()
+    following_count = Follower.objects.filter(follower=user_data).count()
 
-    # Retrieve the list of follows (users the current user is following)
-    follows = user_data.following.all()
+    # Get the followers and follows (if needed, for future use)
+    followers = Follower.objects.filter(user=user_data).select_related('follower')
+    follows = Follower.objects.filter(follower=user_data).select_related('user')
 
-    # Pass user data, user posts, followers, and follows to the template
     context = {
         'user_data': user_data,
         'user_posts': user_posts,
         'followers': followers,
         'follows': follows,
+        'follower_count': follower_count,
+        'following_count': following_count,
     }
 
-    print(context)
-    # Render the profile.html template with the context
     return render(request, 'user/accounts/profile.html', context)
 
+@login_required
 def follow_user(request, user_id):
     # Get the user to follow
-    user_to_follow = User.objects.get(id=user_id)
+    user_to_follow = get_object_or_404(User, id=user_id)
 
-    # Check if the current user is already following the user_to_follow
-    if not Follower.objects.filter(user=user_to_follow, follower=request.user).exists():
-        # Create a new follower relationship
+    # Check if the current user is already following the user to follow
+    existing_follower = Follower.objects.filter(user=user_to_follow, follower=request.user).exists()
+
+    if not existing_follower:
+        # Create a new Follower object if not already following
         Follower.objects.create(user=user_to_follow, follower=request.user)
+        # Optionally, you can add a message indicating the follow action was successful
 
-    # Redirect to the user's profile page
-    return redirect('/profile')
+    # Redirect back to the profile page
+    return redirect('profile', id=user_id)
 
 from django.shortcuts import render
 from haystack.query import SearchQuerySet
