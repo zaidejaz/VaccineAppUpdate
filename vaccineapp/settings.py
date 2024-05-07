@@ -223,3 +223,11 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1',
     'https://vaccineapplive.up.railway.app'
 ]
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://vaccineapp.up.railway.app',
+    'http://127.0.0.1',
+    'https://vaccineapplive.up.railway.app'
+]
+
