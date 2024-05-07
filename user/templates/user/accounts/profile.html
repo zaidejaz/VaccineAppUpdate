@@ -1,16 +1,45 @@
 {% extends "user/base.html" %}
 {% block content %}
 <div class="container">
-    
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">User Details</h5>
             <p class="card-text">Email: {{ user_data.email }}</p>
             <p class="card-text">Username: {{ user_data.username }}</p>
             <p class="card-text">Date Joined: {{ user_data.date_joined }}</p>
-            
+
             <a href="/follow/{{ user_data.id }}/" class="btn btn-primary">Follow</a>
+
+            <!-- Display User's Posts -->
+            <h5 class="card-title mt-4">Posts</h5>
+            <ul>
+                {% for post in user_posts %}
+                    <li>
+                        <a href="{% url 'post-detail' post.id %}">{{ post.juza }} - {{ post.surah }} by {{ post.reader }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Display User's Followers -->
+            <h5 class="card-title mt-4">Followers</h5>
+            <ul>
+                {% for follower in followers %}
+                    <li>
+                        <a href="{% url 'profile' follower.id %}">{{ follower.username }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Display Users the Current User is Following -->
+            <h5 class="card-title mt-4">Following</h5>
+            <ul>
+                {% for following in follows %}
+                    <li>
+                        <a href="{% url 'profile' following.id %}">{{ following.username }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock %}

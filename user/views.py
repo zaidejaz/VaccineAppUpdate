@@ -50,13 +50,31 @@ def upload_profile_pic(request):
     else:
         # Render the HTML form
         return render(request, 'user/accounts/upload_profile_pic.html')
-def profile(request,id):
+    
+def profile(request, id):
+    # Retrieve the user based on the provided ID
     user_data = User.objects.get(id=id)
+
+    # Retrieve the user's posts
+    user_posts = Post.objects.filter(author=user_data)
+
+    # Retrieve the list of followers (users who follow the current user)
+    followers = user_data.followers.all()
+
+    # Retrieve the list of follows (users the current user is following)
+    follows = user_data.following.all()
+
+    # Pass user data, user posts, followers, and follows to the template
     context = {
-        'user_data' : user_data,
-        
+        'user_data': user_data,
+        'user_posts': user_posts,
+        'followers': followers,
+        'follows': follows,
     }
-    return render(request,'user/accounts/profile.html',context)
+
+    print(context)
+    # Render the profile.html template with the context
+    return render(request, 'user/accounts/profile.html', context)
 
 def follow_user(request, user_id):
     # Get the user to follow
