@@ -218,4 +218,8 @@ STATICFILES_FINDERS = [
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-
+CORS_ALLOWED_ORIGINS = [
+    'https://vaccineapp.up.railway.app',
+    'http://127.0.0.1',
+    'https://vaccineapplive.up.railway.app'
+]
