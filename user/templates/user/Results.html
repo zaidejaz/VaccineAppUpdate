@@ -1,0 +1,154 @@
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+{% extends "user/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+ <h1>Results Dashboard</h1>
+ {% load static %}
+<!--  <img src="{% static 'svm.png' %}" alt="Result">  -->
+<!-- <img src="{% static 'textrank.png' %}" alt="Result"> -->
+<button type="button" id="svm" class="btn btn-secondary">SVM</button> 
+<button type="button" id="textrank" class="btn btn-secondary">Textrank</button> 
+<button type="button" id="refresh" class="btn btn-secondary">Refresh</button> 
+<button type="button" id="downloadsvmbtn" class="btn btn-secondary">Download SVM</button> 
+<button type="button" id="downloadtextrankbtn" class="btn btn-secondary">Download Textrank</button> 
+<button type="button" id="downloadldabtn" class="btn btn-secondary">Download LDA</button> 
+<a href="{% static 'svm.png' %}" download id="downloadsvm" hidden></a>
+<a href="{% static 'textrank.png' %}" download id="downloadtextrank" hidden></a>
+<a href="{% static 'topic_9.html' %}" download id="downloadhtml" hidden></a>
+<div id="load"> </div>
+
+<script>
+
+
+$( document ).ready(function() {
+
+
+
+$( "#downloadsvmbtn" ).click(function() {
+document.getElementById('downloadsvm').click();
+});
+
+$( "#downloadtextrankbtn" ).click(function() {
+document.getElementById('downloadtextrank').click();
+});
+
+$( "#downloadldabtn" ).click(function() {
+document.getElementById('downloadhtml').click();
+});
+
+$( "#refresh" ).click(function() {
+location.reload();
+});
+
+$( "#svm" ).click(function() {
+
+     $('<div></div>').dialog({
+        modal: true,
+        height: 600,
+        width: 800,
+        title: "SVM",
+        open: function() {
+          $(this).html('<img class="NO-CACHE" src="{% static 'svm.png' %}">');
+          $("html, body").animate({scrollTop:"-=800"})
+          $('.NO-CACHE').attr('src',function () { return $(this).attr('src') + "?a=" + Math.random() });
+        },
+        buttons: {
+          Ok: function() {
+            $( this ).dialog( "destroy" ).remove();
+          }
+        }
+      }); 
+
+});
+
+$( "#textrank" ).click(function() {
+
+     $('<div></div>').dialog({
+        modal: true,
+        height: 600,
+        width: 800,
+        title: "Textrank",
+        open: function() {
+          $(this).html('<img class="NO-CACHE" src="{% static 'textrank.png' %}">');
+          $("html, body").animate({scrollTop:"-=800"})
+          $('.NO-CACHE').attr('src',function () { return $(this).attr('src') + "?a=" + Math.random() });
+        },
+        buttons: {
+          Ok: function() {
+            $( this ).dialog( "destroy" ).remove();
+          }
+        }
+      }); 
+
+
+});
+
+
+
+/*
+var intervalId = window.setInterval(function(){
+
+  $.get("{% static 'topic_9.html' %}", function(data) {
+  $( "#load" ).html( "<div>"+data+"</div>" );
+
+  });
+}, 2000);
+*/
+
+const x = new Date();
+$('#load').load(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/"+"static/topic_9.html?"+x.getTime());
+
+var intervalId = window.setInterval(function(){
+    //alert(window.location.href+"/../../static/topic_9.html");
+    const x = new Date();
+    $('#load').load(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/"+"static/topic_9.html?"+x.getTime());
+    //$('#load').load("{% static 'topic_9.html' %}");
+
+}, 15000);
+
+/*
+$( "#btn2" ).click(function() {
+
+$.get("{% static 'topic_9.html' %}", function(data) {
+
+     $('<div></div>').dialog({
+        modal: true,
+        height: 600,
+        width: 1060,
+        title: "Graphics Results",
+        open: function() {
+          $(this).html(data);
+        },
+        buttons: {
+          Ok: function() {
+            $( this ).dialog( "destroy" ).remove();
+          }
+        }
+      }); 
+});
+
+});
+*/
+        
+
+});
+</script>
+
+
+<!--<form method="POST" enctype= multipart/form-data>
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>-->
+{% endblock content %}

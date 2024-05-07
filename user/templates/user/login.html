@@ -1,0 +1,38 @@
+{% extends "user/base.html" %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}  <!-- Add this line to load socialaccount tags -->
+{% block content %}
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
+<header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+
+      <a class="navbar-brand mr-4" >{% load static %} <img src="{% static "user/media/NewLogo_3.png" %}" class="rounded float-left"  alt="logo" width=80px height=80px /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+  </nav>
+</header>
+<body>
+<form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log in</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Login</button>
+            </div>
+        </form>
+  <div class="border-top pt-3">
+            <small class="text-muted">
+                 Need An Account? <a class="ml-2" href="{% url 'site-register' %}">Register Now!</a>
+            </small>
+        </div>
+
+    <a class="nav-item nav-link" href="{% url 'site-user-passwordreset' %}">Forgot password? Click here!</a></body>
+</br>
+{% endblock %}

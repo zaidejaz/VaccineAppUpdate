@@ -1,0 +1,25 @@
+<!--inherits the layout-->
+{% extends 'user/_base.html' %}
+<!--passes the page title-->
+{% block title %}{{page_title}}{% endblock title %}
+<!--content starts-->
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">Recorded audios</h1>
+    {% for record in records %}
+    <div class="level-item has-text-centered">
+      <div>
+        <audio controls>
+          <source src="/media/{{ record.voice_record }}" type="audio/mpeg"> 
+          <source src="/media/{{ record.voice_record }}" type="audio/webm">
+          Your browser does not support the audio element.
+        </audio>
+        <p>Language: {{record.language}}</p>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}

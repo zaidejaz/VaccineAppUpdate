@@ -1,0 +1,119 @@
+{% extends "user/base.html" %}
+{% block content %}
+
+
+
+
+<div class="col-md-12 mt-4">
+        <div class="card">
+            <div class="card-header  text-black" style="background-color: #C9D7FE;">
+               <h7> Enter Your Keywords </h7>
+            </div>
+            <div class="card-body">
+                <div class="row"> 
+                    <div class="col-md-12">
+                            <div class="form-group col-md-12">
+   									 <input type="text" class="form-control" id="inputKeywords" placeholder="e.g Moderna, Pfizer-BioNTech,Oxford-AstraZeneca"/>
+							</div>
+                        <a class="text-decoration-none text-dark" id="target1" >
+                            <div class="card my-card shadow">
+                                <div class="card-body text-center">
+
+                                    <h4>
+                                    Execute Model &nbsp; 
+                                    <i id="check1" class='fab fa-twitter' style='font-size:24px;color:red'></i>
+                                    </h4>
+
+                                    <div class="spinner-grow text-success" style="width: 1rem; height: 1rem;" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-warning" style="width: 1rem; height: 1rem;" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-danger" style="width: 1rem; height: 1rem;" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
+                                    
+                                    <!--  <h3>{{ scrap_count }}</h3> -->
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script type="text/javascript">
+
+
+function execute_model(){
+    let inputKeywords = document.getElementById("inputKeywords").value; 
+    
+    $.ajax({
+            type: 'POST',
+            url: "{% url 'site-execute-model' %}",
+            data: inputKeywords,
+            success: function (response) {
+                // on successfull creating object
+                // display the newly friend to table.
+                //var instance = JSON.parse(response["instance"]);
+            a = "http://"+String(window.location.host) + "/addfile/results";
+            window.location.href = a;
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        });
+
+}    
+
+
+
+function animation(t1,t2,t3){
+           //Preparar
+            $( "#check1" ).hide();
+            $(".spinner-grow.text-success").attr('class', 'spinner-border text-success'); 
+            $('.spinner-grow.text-warning').hide();
+            $('.spinner-grow.text-danger').hide();
+    
+    setTimeout(function(){
+            $('.spinner-border.text-success').attr('class', 'spinner-grow text-success'); 
+            $(".spinner-grow.text-warning").attr('class', 'spinner-border text-warning').show();  
+            $('.spinner-grow.text-danger').hide();
+    }, t1);
+
+    setTimeout(function(){
+            $('.spinner-border.text-warning').attr('class', 'spinner-grow text-warning');
+            $(".spinner-grow.text-danger").attr('class', 'spinner-border text-danger').show();  
+    }, t2);
+
+    setTimeout(function(){
+            $('.spinner-border.text-danger').attr('class', 'spinner-grow text-danger');
+            $( "#check1" ).show();
+
+    }, t3);
+}
+
+
+$( document ).ready(function() {
+ 
+
+$( "#target1" ).click(function() {
+    //var newURL = window.location.protocol + ":/" + window.location.host + "/" + window.location.pathname;
+    //window.location.assign(String(window.location.host) + "/addfile/results");
+    //alert(newURL);
+     animation(20000,60000,90000);
+     execute_model();
+    
+});
+
+
+});
+</script>
+
+
+{% endblock content %}

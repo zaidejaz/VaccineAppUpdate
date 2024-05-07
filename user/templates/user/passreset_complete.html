@@ -1,0 +1,26 @@
+{% extends "user/base.html" %}
+
+{% block content %}
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
+
+<header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+
+      <a class="navbar-brand mr-4" >{% load static %} <img src="{% static "user/media/NewLogo_3.png" %}" class="rounded float-left"  alt="logo" width=80px height=80px /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+  </nav>
+</header>
+
+  <div class="alert alert-info">
+            Your password has been set
+        </div>
+<a href={% url'site-user-login' %}> Sign in Here</a>
+
+
+{% endblock content %}

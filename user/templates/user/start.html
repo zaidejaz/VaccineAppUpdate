@@ -1,0 +1,24 @@
+{% extends "user/base.html" %}
+{% block content %}
+{% load socialaccount %}
+
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+<body class="site-header">
+  <nav class="navbar navbar-expand-md navbar-light bg-steel fixed-top">
+
+      <a class="navbar-brand mr-4" >{% load static %} <img src="{% static "user/media/NewLogo_3.png" %}" class="center  alt="logo" width=80px height=80px /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+  </nav>
+                <a href="{% provider_login_url 'google' %}" class="btn btn btn-danger btn-lg btn-block" role="button" aria-pressed="true">Sign in with Google</a>
+
+
+<a type="button" href="{% url 'site-register' %}" class="btn btn-light" >Register</a>
+<a type="button" href="{% url 'site-user-login' %}" class="btn btn-light" >Log in</a>
+</body>
+{% endblock content %}

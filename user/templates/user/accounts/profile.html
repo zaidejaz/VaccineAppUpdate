@@ -1,0 +1,16 @@
+{% extends "user/base.html" %}
+{% block content %}
+<div class="container">
+    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">User Details</h5>
+            <p class="card-text">Email: {{ user_data.email }}</p>
+            <p class="card-text">Username: {{ user_data.username }}</p>
+            <p class="card-text">Date Joined: {{ user_data.date_joined }}</p>
+            
+            <a href="/follow/{{ user_data.id }}/" class="btn btn-primary">Follow</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

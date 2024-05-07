@@ -1,0 +1,38 @@
+,Unnamed: 0,Stem_String,Stem_Stringg,Subjectivity,Polarity,Analysis
+0,0,fall,"[imag, taken, vaccin, hair, fall, realli, realis, call, follow, keep, sweet, fake, inform, talk, without, follow, noth, fact, still, think, peopl, take]",0.825,-0.07500000000000001,Negative
+1,1,program,"[skin, health, exfoli, aggress, antiag, program]",0.0,0.0,Neutral
+2,2,[],[],0.0,0.0,Neutral
+3,3,inject,"[readi, forc, peopl, inject, vaccin, doesnt, vaccin]",0.0,0.0,Neutral
+4,4,sourc,"[fill, bodi, trash, notmean, make, choic, usnow, might, use, move, economi, renew, activ, transport, better, climat, heat, design, suburb, town, educ, health, global, collabor, team, made, microsoft, nonprofit, open, sourc, imag, consortium, came, togeth, help, diagnos, rare, lung, diseas]",0.475,0.2,Positive
+5,5,[],[],0.0,0.0,Neutral
+6,6,doctor,"[urban, leader, involv, aid, public, health, threat, thank, seriou, medium, track, mental, health, issu, behalf, australian, sorri, senior, doctor, need, justic, even, caus, genuin, india, govt, even, care, bother, doctor, demand, fair, counsel, pleas]",0.23333333333333334,0.12,Positive
+7,7,treatment,"[realiti, lucki, patient, get, expir, drug, said, senior, offici, tigray, other, suffer, die, without, treatment]",0.375,-0.125,Negative
+8,8,tongu,"[page, near, complet, remiss, glioblastoma, patient, treat, allogen, dendrit, cell, base, vaccin, role, tumor, specif, cell, cytokin, secret, pattern, predict, respons, recurr, short, film, tongu, cheek, look, empti, promis, hollow, applaus, health, worker, last, year]",0.41944444444444434,-0.20000000000000004,Negative
+9,9,film,"[gone, live, film, watch, free]",0.65,0.2681818181818182,Positive
+10,10,behaviour,"[could, shareunderstand, human, behaviour, basi, chang, congrat, support, countri, behaviour, insight, unit, implement, systemat, approach, understand, health, behaviour, pleas, share, widelyhail, brahmin, supremaci, slave, love, religi, dictat, shopkeep, paid, loss, templ, treasuri, took, prabhu, krodh, legal, action, thekedaar, peac, religion, day, left]",0.19999999999999998,0.15999999999999998,Positive
+11,11,servic,"[schedul, hear, situat, imagin, stress, aspir, concentr, studypleas, bring, notif, today, save, saviorstoday, talk, bootl, come, along, michel, peopl, import, local, commun, make, real, differ, life, other, lead, mental, health, servic, provid, mental, health, support, worker, perth, click]",0.215,-0.025,Negative
+12,12,improv,"[gotten, wors, find, noth, enjoy, anymor, everyday, blur, next, noth, mean, anyth, alreadi, improv, life, good, amount, mental, health, improv, worri, lucki, patient, peopl, around, mew, work, night, covid, need, help, ask]",0.4312500000000001,0.08124999999999999,Positive
+13,13,[],[],0.0,0.0,Neutral
+14,14,[],[],0.0,0.0,Neutral
+15,15,[],[],0.0,0.0,Neutral
+16,16,[],[],0.0,0.0,Neutral
+17,17,[],[],0.0,0.0,Neutral
+18,18,[],[],0.0,0.0,Neutral
+19,19,[],[],0.0,0.0,Neutral
+20,20,advertis,"[report, show, young, peopl, heavi, drinker, increasingli, target, alcohol, advertis, often, detriment, health]",0.4,0.1,Positive
+21,21,associ,"[week, virtual, intern, confer, associ, amiculum]",0.0,0.0,Neutral
+22,22,event,"[miss, event, regist, free]",0.8,0.4,Positive
+23,23,covid,"[alcala, polic, station, conduct, distribut, face, mask, brgi, bersamin, pangasi, likewis, remind, alway, observ, minimum, health, standard, protocol, prevent, covid]",0.0,0.0,Neutral
+24,24,[],[],0.0,0.0,Neutral
+25,25,[],[],0.0,0.0,Neutral
+26,26,week,"[health, like, vincent, hospit, sydney, monitor, patient, home, live, deviceseveryday, assur, notif, come, today, push, toward, anxieti, stress, covid, warrior, realli, deserv, pleas, week]",0.5,0.13636363636363635,Positive
+27,27,ell,[sell],0.0,0.0,Neutral
+28,28,health,"[batteri, health]",0.0,0.0,Neutral
+29,29,everyon,"[go, negoti, call, kindli, simpl, go, walk, talk, without, normal, distract, life, especi, phone, great, talk, problem, need, vote, freedom, parti, stop, govern, allow, corrupt, world, health, organis, get, control, everyon, australia, inform, consent, well, tell, would, know, vaccin, centr, tell, consent, vaccin, still, think, everyon, forc, absolut, hypocrit, woman, choic, take, given, go, doctor, decad, experi, mani, lose, govern, conced, vaccin, mandat, disproportion, respons, could, thousand, extra, worker, hospit, overnight, mandat, revok]",0.625,0.11250000000000002,Positive
+30,30,anyon,"[join, movement, tackl, loneli, affect, anyon]",0.0,0.0,Neutral
+31,31,life,"[student, access, mental, health, support, spectrum, life, togetheral, info]",0.2,-0.1,Negative
+32,32,week,"[assur, notif, come, today, push, toward, anxieti, stress, covid, warrior, realli, deserv, pleas, week]",0.0,0.0,Neutral
+33,33,neil,"[hear, guest, speaker, share, insight, mental, health, awar, week, charli, king, courtney, scarlett, sonia, neil]",0.2,-0.1,Negative
+34,34,healthcar,"[manchest, mental, health, foundat, trust, launch, research, unit, design, studi, inequ, mental, physic, healthcar]",0.2,-0.1,Negative
+35,35,"ead, click, link","[read, click, link]",0.0,0.0,Neutral
+36,36,[],[],0.0,0.0,Neutral

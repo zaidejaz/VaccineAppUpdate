@@ -1,0 +1,225 @@
+{% extends "user/base.html" %} {% load crispy_forms_tags %} {% block content %}
+<a class="navbar-brand mr-4"
+  >{% load static %} <img src="{% static "user/media/NewLogo_3.png" %}"
+  class="rounded float-left" alt="logo" width=80px height=80px /></a
+>
+<div class="content-section">
+  <form
+    method="POST"
+    enctype="multipart/form-data"
+    action="{% url 'post_form' %}"
+  >
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Audio Post</legend>
+      <!-- {{ form|crispy }} -->
+    </fieldset>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="juzSelector">Select Juz:</label>
+        <select id="juzSelector" name="juz" class="form-control">
+          <option value="1">Juz 1</option>
+          <option value="2">Juz 1-3</option>
+          <option value="3">Juz 3</option>
+          <option value="4">Juz 4</option>
+          <option value="6">Juz 6</option>
+          <option value="7">Juz 7</option>
+          <option value="8">Juz 8</option>
+          <option value="9">Juz 9</option>
+          <option value="10">Juz 10</option>
+          <option value="11">Juz 11</option>
+          <option value="12">Juz 12</option>
+          <option value="13">Juz 13</option>
+          <option value="14">Juz 14</option>
+          <option value="15">Juz 15</option>
+          <option value="16">Juz 16</option>
+          <option value="17">Juz 17</option>
+          <option value="18">Juz 18</option>
+          <option value="19">Juz 19</option>
+          <option value="20">Juz 20</option>
+          <option value="21">Juz 21</option>
+          <option value="22">Juz 22</option>
+          <option value="23">Juz 23</option>
+          <option value="24">Juz 24</option>
+          <option value="25">Juz 25</option>
+          <option value="26">Juz 26</option>
+          <option value="27">Juz 27</option>
+          <option value="28">Juz 28</option>
+          <option value="29">Juz 29</option>
+          <option value="30">Juz 30</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="surahSelector">Select Surah:</label>
+        <select id="surahSelector" name="surah" class="form-control">
+          <!-- Surah options will be dynamically populated here -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="reader">Reader:</label>
+        <input
+          id="reader"
+          name="reader"
+          type="text"
+          class="form-control"
+          placeholder="Enter Reader Name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="audio">Audio File:</label>
+        <input
+          id="audio"
+          name="audio"
+          type="file"
+          class="form-control"
+          accept=".wav, .mp3, .webm"
+        />
+      </div>
+      <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea
+          id="content"
+          name="content"
+          class="form-control"
+          placeholder="Enter content"
+          rows="3"
+          style="height: 100px"
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Post</button>
+      <a>.wav, .mp3 files only</a>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Surah data grouped by Juz
+  const surahsByJuz = {
+    1: ["001-Al-Fateha", "002-Al-Bakara"],
+    2: ["001-Al-Fateha", "002-Al-Bakara", "003-Al-Emran"],
+    3: ["003-Al-Emran"],
+    4: ["004-Al-Nesaa"],
+    6: ["005-Al-Maeda."],
+    7: ["006-Al-Anaam"],
+    8: ["007-Al-Aaraf"],
+    9: ["008-Al-Anfal"],
+    10: ["009-Al-Tawba"],
+    11: ["010-Younos", "011-Hood"],
+    12: ["012-Yusuf"],
+    13: ["013-Al-Raad", "014-Ibrahim"],
+    14: ["015-Al-Hejr", "016-Al-Nahl", "017-Al-Esraa"],
+    15: ["018-Al-Kahf."],
+    16: ["019-Mariam", "020-Taha"],
+    17: ["021-Al-Anbiaa", "022-Al-Haj"],
+    18: ["023-Al-Moamenon", "024-Al-Nour", "025-Al-Forkan"],
+    19: ["026-Al-Shoaraa", "027-Al-Naml"],
+    20: ["028-Al-Kasas", "029-Al-Ankabot"],
+    21: ["030-Al-Rom", "031-Lokman", "032-Al-Sajda", "033-Al-Ahzab"],
+    22: ["034-Sabaa", "035-Fater", "036-Yassein"],
+    23: ["037-Al-Saffat", "038-Sadd", "039-Al-Zomar"],
+    24: ["040-Ghafer", "041-Fosselat"],
+    25: ["042-Al-Shora", "043-Al-Zokhrof", "044-Al-Dokhan", "045-Al-Jathia"],
+    26: [
+      "046-Al-Ahkaf",
+      "047-Muhammad",
+      "048-Al-Fath",
+      "049-Al-Hojorat",
+      "050-kaf",
+      "051-Al-Zariat",
+    ],
+    27: [
+      "052-Al-Tor",
+      "053-Al-Najm",
+      "054-Al-Kamar",
+      "055-Al-Rahman",
+      "056-Al-Wakea",
+      "057-Al-Hadid",
+    ],
+    28: [
+      "058-Al-Mojadala",
+      "059-Al-Hashr",
+      "060-Al-Momtahana",
+      "061-Al-Saf",
+      "062-Al-Jomoa",
+      "063-Al-Monafekon",
+      "064-Al-Taghabon",
+      "065-Al-Talak",
+      "066-Al-Tahreem",
+    ],
+    29: [
+      "067-Al-Mol",
+      "068-Al-kalam",
+      "069-Al-Hakka",
+      "070-Al-Maarej",
+      "071-Nouh",
+      "072-Al-Jen",
+      "073-Al-Mozamil",
+      "074-Al-Modather",
+      "075-Al-Keiama",
+      "076-Al-Ensan",
+      "077-Al-Morssalat",
+    ],
+    30: [
+      "078-Al-Nabaa",
+      "079-Al-Nazeat",
+      "080-Abasa",
+      "081-Al-Takwir",
+      "082-Al-Enfetar",
+      "083-Al-Motaffefin",
+      "084-Al-Enshekak",
+      "085-Al-Boroj",
+      "086-Al-Tarek",
+      "087-Al-Aala",
+      "088-Al-Ghashia",
+      "089-Al-Fajr",
+      "090-Al-Balad",
+      "091-Al-Shams",
+      "092-Al-Lail",
+      "093-Al-Doha",
+      "094-Al-Sharh",
+      "095-Al-Teen",
+      "096-Al-Alak",
+      "097-Al-kadr",
+      "098-Al-Baiena",
+      "099-Al-Zalzala",
+      "100-Al-Adiat",
+      "101-Al-Karea",
+      "102-Al-Takathor",
+      "103-Al-Asr",
+      "104-Al-Homaza",
+      "105-Al-Feel",
+      "106-Koraish",
+      "107-Al-Maaon",
+      "108-Al-Kawthar",
+      "109-Al-Kaferon",
+      "110-Al-Nasr",
+      "111-Al-Masad",
+      "112-Al-Ekhlas",
+      "113-Al-Falak",
+      "114-Al-Nas",
+    ],
+  };
+
+  // Function to populate Surah options based on selected Juz
+  function populateSurahOptions(juz) {
+    const surahs = surahsByJuz[juz] || [];
+    const surahSelector = $("#surahSelector");
+    surahSelector.empty(); // Clear existing options
+    $.each(surahs, function (index, surah) {
+      surahSelector.append(`<option value="${surah}">${surah}</option>`);
+    });
+  }
+
+  // Initial population of Surah options based on default Juz selection
+  populateSurahOptions($("#juzSelector").val());
+
+  // Event listener for Juz selection change
+  $("#juzSelector").change(function () {
+    const selectedJuz = $(this).val();
+    populateSurahOptions(selectedJuz);
+  });
+</script>
+
+{% endblock content %}
