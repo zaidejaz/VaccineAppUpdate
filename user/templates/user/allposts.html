@@ -1,0 +1,201 @@
+{% extends "user/base.html" %} {% block content %}
+<h2 class="text-center">All posts</h2>
+<div class="row">
+    
+    <style>
+        .like-btn {
+            flex-direction: row;
+            display: flex;
+        }
+
+        .like-btn:hover {
+            cursor: pointer;
+        }
+
+        .like-btn p {
+            margin-right: 10px;
+            font-size: 13px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .dislike-btn {
+            flex-direction: row;
+            display: flex;
+        }
+
+        .dislike-btn:hover {
+            cursor: pointer;
+        }
+
+        .dislike-btn p {
+            margin-right: 10px;
+            margin-left: 10px;
+            font-size: 13px;
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Sidebar included here -->
+    <div class="col-md-3">
+        {% include 'user/sidebar.html' %}
+    </div>
+    <div class="col-md-3">
+        {% if posts %} {% for post in posts %}
+        <div class="level-item has-text-centered "
+            style="background-color: lightgray; padding: 8px; margin-top: 5px; width: 500px;">
+            <p style="font-size: 14px">Author: {{ post.author.username }}
+            <p style="font-size: 14px">
+                {{ post.juza }} {{ post.surah }}, {{ post.reader }}
+            </p>
+            <audio controls>
+                <source src="/media/{{ post.file }}" type="audio/mpeg" />
+                <source src="/media/{{ post.file }}" type="audio/webm" />
+                Your browser does not support the audio element.
+            </audio>
+            <div class="row">
+                <div class="col-md-8">
+                    <p style="font-size: 13px; margin-top: 10px">{{ post.content }}</p>
+                    <p style="font-size: 12px; margin-top: 10px">
+                        Posted {{ post.date_posted|timesince }} ago
+                    </p>
+                </div>
+
+                <div class="col-md-4" style="margin-top: 20px; margin-left: 20px">
+                    <div class="row">
+                        <a class="like-btn" data-post-id="{{ post.id }}">
+                            <p id="like-count-{{ post.id }}">{{ post.like_count }}</p>
+                            <svg viewBox="0 -0.5 21 21" width="24" height="24" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <title>like [#1386]</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Dribbble-Light-Preview" transform="translate(-219.000000, -760.000000)"
+                                            fill="#000000">
+                                            <g id="icons" transform="translate(56.000000, 160.000000)">
+                                                <path
+                                                    d="M163,610.021159 L163,618.021159 C163,619.126159 163.93975,620.000159 165.1,620.000159 L167.199999,620.000159 L167.199999,608.000159 L165.1,608.000159 C163.93975,608.000159 163,608.916159 163,610.021159 M183.925446,611.355159 L182.100546,617.890159 C181.800246,619.131159 180.639996,620.000159 179.302297,620.000159 L169.299999,620.000159 L169.299999,608.021159 L171.104948,601.826159 C171.318098,600.509159 172.754498,599.625159 174.209798,600.157159 C175.080247,600.476159 175.599997,601.339159 175.599997,602.228159 L175.599997,607.021159 C175.599997,607.573159 176.070397,608.000159 176.649997,608.000159 L181.127196,608.000159 C182.974146,608.000159 184.340196,609.642159 183.925446,611.355159"
+                                                    id="like-[#1386]"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="dislike-btn" data-post-id="{{ post.id }}">
+                            <p id="dislike-count-{{ post.id }}">{{ post.dislike_count }}</p>
+                            <svg fill="#000000" width="24" height="24" viewBox="0 0 32 32" style="
+                  fill-rule: evenodd;
+                  clip-rule: evenodd;
+                  stroke-linejoin: round;
+                  stroke-miterlimit: 2;
+                " version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M21.045,20.004c0,0.552 0.448,1 1,1l5,-0c0.552,-0 1,-0.448 1,-1l0,-15c0,-0.552 -0.448,-1 -1,-1l-5,-0c-0.552,-0 -1,0.448 -1,1l0,15Z">
+                                    </path>
+                                    <path
+                                        d="M15.117,26.067l3.84,-7.613c0.071,-0.139 0.107,-0.294 0.107,-0.45l0,-11c0,-0.266 -0.106,-0.521 -0.294,-0.709l-2.01,-2c-0.187,-0.186 -0.441,-0.291 -0.705,-0.291l-6.351,-0c-1.43,-0 -2.661,1.009 -2.942,2.411l-2.204,11.01c-0.176,0.882 0.052,1.796 0.623,2.492c0.57,0.695 1.422,1.098 2.322,1.097l2.961,-0.003l-1.021,3.105c-0.504,1.533 0.331,3.185 1.865,3.689c0.048,0.016 0.097,0.032 0.146,0.048c1.507,0.496 3.129,-0.302 3.663,-1.786Zm-0,0l0.001,-0.003l-0.002,0.004l0.001,-0.001Z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %} {% else %}
+        <p>No Post found.</p>
+        {% endif %}
+    </div>
+
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <a class="navbar-brand mr-4" href="{% url 'site-homepage' %}">{% load static %} <img src="{% static 'user/media/NewLogo_3.png' %}" class="rounded-left" alt="logo" width=50px height=50px /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="{% url 'post_form' %}" class="btn btn-light">Post</a>
+            <a href="{% url 'record' %}" class="btn btn-light">Record</a>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto"></div>
+
+                <form class="d-flex" role="search" action="{% url 'searchpage' %}" method="GET">
+                    <input class="form-control me-2" type="search" placeholder="Search" name="q" required
+                        aria-label="Search" />
+                    <button class="btn btn-outline-success ml-2" type="submit">
+                        Search
+                    </button>
+                </form>
+                <a type="button" href="{% url 'site-editacc' %}" class="btn btn-light ml-3">Edit Account</a>
+            </div>
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'site-user-logout' %}">{% load static %} <img src="{% static 'user/media/logout.png' %}" width=30px height=30px</a>
+                {% endif%}
+        </nav>
+    </header>
+
+    <script>
+        $(document).ready(function () {
+            $(".like-btn").click(function (e) {
+                e.preventDefault();
+                var post_id = $(this).data("post-id");
+                $.ajax({
+                    type: "POST",
+                    url: "/like-post/" + post_id + "/",
+                    data: {
+                        csrfmiddlewaretoken: "{{ csrf_token }}",
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            console.log(data);
+                            // Update the like count displayed on the button
+                            const likeText = $(`#like-count-${post_id}`);
+                            likeText.text(data.like_count);
+                        } else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function (xhr, errmsg, err) {
+                        alert("Error: " + xhr.status + ": " + xhr.responseText);
+                    },
+                });
+            });
+
+            $(".dislike-btn").click(function (e) {
+                e.preventDefault();
+                var post_id = $(this).data("post-id");
+                $.ajax({
+                    type: "POST",
+                    url: "/dislike-post/" + post_id + "/",
+                    data: {
+                        csrfmiddlewaretoken: "{{ csrf_token }}",
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            // Update the dislike count displayed on the button
+                            const dislikeText = $(`#dislike-count-${post_id}`);
+                            dislikeText.text(data.dislike_count);
+                        } else {
+                            alert(data.error);
+                        }
+                    },
+                    error: function (xhr, errmsg, err) {
+                        alert("Error: " + xhr.status + ": " + xhr.responseText);
+                    },
+                });
+            });
+        });
+    </script>
+
+    {% endblock content %}
+</div>

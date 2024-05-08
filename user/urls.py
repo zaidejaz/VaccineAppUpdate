@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.conf.urls.static import static
-from .views import Home, PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, recommendation_view
+from .views import Home, PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, allposts, my_following, recommendation_view
 from django.conf import settings
 urlpatterns =[
     path('', views.search, name="search"),
@@ -45,6 +45,8 @@ urlpatterns =[
     path('like-post/<int:post_id>/', views.like_post, name="likePost"),
     path('dislike-post/<int:post_id>/', views.dislike_post, name="disLikePost"),
     path('recommendations/', recommendation_view, name='recommendations'),
+    path('following/', my_following, name='following'),
+    path('allposts/', allposts, name='allposts'),
 ]
 
 

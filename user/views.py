@@ -91,8 +91,16 @@ def follow_user(request, user_id):
         Follower.objects.create(user=user_to_follow, follower=request.user)
         # Optionally, you can add a message indicating the follow action was successful
 
-    # Redirect back to the profile page
-    return redirect('profile', id=user_id)
+    # Redirect back to the previous page
+    # Retrieve the referrer URL from the request headers
+    referrer_url = request.META.get('HTTP_REFERER')
+
+    # Redirect the user to the referrer URL if available; otherwise, fallback to a default URL
+    if referrer_url:
+        return redirect(referrer_url)
+    else:
+        # Fallback to a default URL if HTTP_REFERER is not available
+        return redirect('profile', id=user_id)
 
 from django.shortcuts import render
 from haystack.query import SearchQuerySet
@@ -382,6 +390,7 @@ import h5py
 from user.models import Post
 import random
 
+@login_required
 def recommendation_view(request):
     user_id = request.GET.get('user_id', None)
     items = Post.objects.all()
@@ -423,4 +432,35 @@ def get_random_items():
     top_random_posts = all_posts[:10]
     return top_random_posts
 
-# URL Configuration and HTML Template remain the same as before
+#Following posts
+@login_required
+def my_following(request):
+    # Get the current user
+    current_user = request.user
+    
+    # Query the user IDs the current user is following
+    following_users_ids = Follower.objects.filter(follower=current_user).values_list('user', flat=True)
+    
+    # Check if following_users_ids is not empty before using it in a queryset
+    if following_users_ids:
+        # Query the User objects that the current user is following
+        following_users = User.objects.filter(id__in=following_users_ids)
+        
+        # Filter posts where the author is in the list of followed users
+        posts = Post.objects.filter(author__in=following_users)
+    else:
+        # If following_users_ids is empty, set posts to an empty queryset
+        posts = Post.objects.none()
+    
+    return render(request, 'user/my_following.html', {'posts': posts})
+
+@login_required
+def allposts(request):
+    {'user': Account.objects.all(),
+     'posts': posts
+     }
+    allPosts = Post.objects.annotate(
+        like_count=models.Count('likes_dislikes', filter=models.Q(likes_dislikes__like=True)),
+        dislike_count=models.Count('likes_dislikes', filter=models.Q(likes_dislikes__dislike=True))
+    )
+    return render(request, 'user/allposts.html', {'title': 'All Posts', "posts": allPosts})

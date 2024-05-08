@@ -40,12 +40,13 @@
     {% include 'user/sidebar.html' %}
   </div>
   <div class="col-md-3">
-    {% if recommended_items %} {% for post in recommended_items %}
+    {% if posts %} {% for post in posts %}
     <div
       class="level-item has-text-centered "
       style="background-color: lightgray; padding: 8px; margin-top: 5px; width: 500px;"
     >
       <p style="font-size: 14px">Author: {{ post.author.username }} - <a href="/follow/{{ post.author.id }}/" class="btn btn-primary align-left">Follow</a>
+
       <p style="font-size: 14px">
         {{ post.juza }} {{ post.surah }}, {{ post.reader }}
       </p>
