@@ -39,13 +39,20 @@
     </style>
     <!-- Sidebar included here -->
     <div class="col-md-3">
+      {%if user.is_authenticated%}
       {% include 'user/sidebar.html' %}
+      {%else%}
+      <a type="button" href="{% url 'site-user-login' %}">Login</a>
+      {%endif%}
     </div>
     <div class="col-md-3">
       {% if posts %} {% for post in posts %}
       <div class="level-item has-text-centered "
         style="background-color: lightgray; padding: 8px; margin-top: 5px; width: 500px;">
         <p style="font-size: 14px">Author: {{ post.author.username }}
+          {%if user.is_authenticated%}- <a href="/follow/{{ post.author.id }}/"
+            class="btn btn-primary align-left">Follow</a>
+          {%endif%}
 
         <p style="font-size: 14px">
           {{ post.juza }} {{ post.surah }}, {{ post.reader }}
@@ -119,7 +126,8 @@
 
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <a class="navbar-brand mr-4" href="{% url 'site-homepage' %}">{% load static %} <img src="{% static 'user/media/NewLogo_3.png' %}" class="rounded-left" alt="logo" width=50px height=50px /></a>
+        <a class="navbar-brand mr-4" href="{% url 'site-homepage' %}">{% load static %} <img
+            src="{% static 'user/media/NewLogo_3.png' %}" class="rounded-left" alt="logo" width=50px height=50px /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -135,10 +143,12 @@
               Search
             </button>
           </form>
-          <a type="button" href="{% url 'site-editacc' %}" class="btn btn-light ml-3">Edit Account</a>
         </div>
         {% if user.is_authenticated %}
-        <a class="nav-item nav-link" href="{% url 'site-user-logout' %}">{% load static %} <img src="{% static 'user/media/logout.png' %}" width=30px height=30px</a>
+        <a type="button" href="{% url 'site-editacc' %}" class="btn btn-light ml-3">Edit Account</a>
+        <a type="button" href="{% url 'profile' user.id %}" class="btn btn-light ml-3">View Profile</a>
+        <a class="nav-item nav-link" href="{% url 'site-user-logout' %}">{% load static %} <img
+            src="{% static 'user/media/logout.png' %}" width=30px height=30px</a>
           {% endif%}
       </nav>
     </header>

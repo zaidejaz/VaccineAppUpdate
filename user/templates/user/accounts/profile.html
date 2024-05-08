@@ -37,19 +37,31 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">User Details</h5>
-            <p class="card-text">Email: {{ user_data.email }}</p>
-            <p class="card-text">Username: {{ user_data.username }}</p>
-            <p class="card-text">Date Joined: {{ user_data.date_joined }}</p>
+            <div class="d-flex flex-row justify-content-between">
+                <h5 class="card-title fw-bolder ">User Details</h5>
+                <a href="/follow/{{ user_data.id }}/" class="btn btn-primary">Follow</a>
+            </div>
+            <p>Email: {{ user_data.email }}</p>
+            <p>Username: {{ user_data.username }}</p>
+            <p>Date Joined: {{ user_data.date_joined }}</p>
 
-            <a href="/follow/{{ user_data.id }}/" class="btn btn-primary">Follow</a>
+            <!-- Display User's Followers -->
+            <div class="d-flex flex-row">
+                Followers: {{follower_count}}
+            </div>  
 
-
+            
+            <!-- Display Users the Current User is Following -->
+            <div>
+                Following: {{following_count}}
+            </div>
+            
+            <h3>Posts:</h3>
             <div class="col-md-3">
                 {% if user_posts %} {% for post in user_posts %}
-                <div class="level-item has-text-centered"
-                    style="background-color: lightgray; padding: 8px; margin-top: 5px">
-                    <p style="font-size: 14px">Author: {{ post.author.username }}</p>
+                <div class="level-item has-text-centered "
+                    style="background-color: lightgray; padding: 8px; margin-top: 5px; width: 500px;">
+                    <p style="font-size: 14px">Author: {{ post.author.username }}
                     <p style="font-size: 14px">
                         {{ post.juza }} {{ post.surah }}, {{ post.reader }}
                     </p>
@@ -66,7 +78,7 @@
                             </p>
                         </div>
 
-                        <div class="col-md-4" style="margin-top: 20px; margin-left: -10px">
+                        <div class="col-md-4" style="margin-top: 20px; margin-left: 20px">
                             <div class="row">
                                 <a class="like-btn" data-post-id="{{ post.id }}">
                                     <p id="like-count-{{ post.id }}">{{ post.like_count }}</p>
@@ -97,11 +109,11 @@
                                 <a class="dislike-btn" data-post-id="{{ post.id }}">
                                     <p id="dislike-count-{{ post.id }}">{{ post.dislike_count }}</p>
                                     <svg fill="#000000" width="24" height="24" viewBox="0 0 32 32" style="
-                              fill-rule: evenodd;
-                              clip-rule: evenodd;
-                              stroke-linejoin: round;
-                              stroke-miterlimit: 2;
-                            " version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                  fill-rule: evenodd;
+                  clip-rule: evenodd;
+                  stroke-linejoin: round;
+                  stroke-miterlimit: 2;
+                " version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
@@ -125,13 +137,7 @@
                 {% endif %}
             </div>
 
-            <!-- Display User's Followers -->
-            <h5 class="card-title mt-4">Followers: </h5>
-            <p>{{follower_count}}</p>
 
-            <!-- Display Users the Current User is Following -->
-            <h5 class="card-title mt-4">Following:</h5>
-            <p>{{followin_count}}</p>
         </div>
     </div>
 </div>
