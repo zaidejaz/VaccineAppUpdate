@@ -173,11 +173,11 @@
               const likeText = $(`#like-count-${post_id}`);
               likeText.text(data.like_count);
             } else {
-              alert(data.error);
+              console.log(data.error);
             }
           },
           error: function (xhr, errmsg, err) {
-            alert("Error: " + xhr.status + ": " + xhr.responseText);
+            console.log("Error: " + xhr.status + ": " + xhr.responseText);
           },
         });
       });
@@ -197,11 +197,11 @@
               const dislikeText = $(`#dislike-count-${post_id}`);
               dislikeText.text(data.dislike_count);
             } else {
-              alert(data.error);
+              console.log(data.error);
             }
           },
           error: function (xhr, errmsg, err) {
-            alert("Error: " + xhr.status + ": " + xhr.responseText);
+            console.log("Error: " + xhr.status + ": " + xhr.responseText);
           },
         });
       });
