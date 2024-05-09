@@ -51,7 +51,6 @@ def upload_profile_pic(request):
         # Render the HTML form
         return render(request, 'user/accounts/upload_profile_pic.html')
     
-@login_required
 def profile(request, id):
     # Get the user data
     user_data = User.objects.get(id=id)
@@ -163,7 +162,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
-
+@login_required
 def record(request):
     if request.method == "POST":
         # Ensure audio data is correctly received
@@ -257,15 +256,20 @@ posts = [
 
 @login_required
 def homepage(request):
-    {'user': Account.objects.all(),
-     'posts': posts
-     }
-    allPosts = Post.objects.annotate(
+    # Query all posts and annotate with like and dislike counts
+    all_posts = Post.objects.annotate(
         like_count=models.Count('likes_dislikes', filter=models.Q(likes_dislikes__like=True)),
         dislike_count=models.Count('likes_dislikes', filter=models.Q(likes_dislikes__dislike=True))
     )
-    return render(request, 'user/homepage.html', {'title': 'Homepage', "posts": allPosts})
-
+    # Prepare context to pass to the template
+    context = {
+        'title': 'Homepage',
+        'posts': all_posts, 
+    }
+    
+    # Render the template with the context data
+    return render(request, 'user/homepage.html', context)
+    
 
 @login_required
 def editacc(request):
@@ -327,7 +331,7 @@ def search(request):
     else:
         return render(request, 'user/search.html')
     
-
+@login_required
 def post_form(request):
     if request.method == 'POST':
         juza = request.POST.get('juz')
@@ -454,7 +458,6 @@ def my_following(request):
     
     return render(request, 'user/my_following.html', {'posts': posts})
 
-@login_required
 def allposts(request):
     {'user': Account.objects.all(),
      'posts': posts

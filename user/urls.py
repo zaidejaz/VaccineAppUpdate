@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from .views import Home, PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, allposts, my_following, recommendation_view
 from django.conf import settings
 urlpatterns =[
-    path('', views.search, name="search"),
+    path('', views.allposts, name="allposts"),
     path('profile/<int:id>/', views.profile, name="profile"),
     
     path('follow/<int:user_id>/', views.follow_user, name='follow_user'),

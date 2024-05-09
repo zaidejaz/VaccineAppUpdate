@@ -4,6 +4,11 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'allposts' %}">
+                                All Posts
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'recommendations' %}">
                                 Recommended
                             </a>
@@ -11,11 +16,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'following' %}">
                                 My Following
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'allposts' %}">
-                                All Posts
                             </a>
                         </li>
                     </ul>
