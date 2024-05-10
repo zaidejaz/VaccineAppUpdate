@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.urls import reverse_lazy
 from .models import Account,LikeDislike
 from .forms import UploadForm, UserRegisterForm, UserUpdateForm
 from django.views.generic import TemplateView
@@ -139,28 +140,37 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'content']
+    form_class = UploadPostForm  # Specify the form class for updating the Post
+    template_name = 'user/post_update.html'  # Specify the template name
 
     def form_valid(self, form):
+        # Automatically set the author to the current user
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+        # Only allow the author of the post to update it
+        return self.request.user == post.author
 
+    def get_success_url(self):
+        # Redirect to the updated post's detail page after a successful update
+        return reverse_lazy('post_detail', kwargs={'pk': self.object.pk})
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = '/'
+    template_name = 'user/post_confirm_delete.html'  # Path to the confirmation template
+
+    def get_success_url(self):
+        # Get the referring URL from the request's headers
+        referrer_url = f'/profile/{self.request.user.id}'
+        return referrer_url
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
+        # Check if the request user is the author of the post
+        return self.request.user == post.author
+    
 
 @login_required
 def record(request):

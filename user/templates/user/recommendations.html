@@ -208,16 +208,16 @@
           },
           success: function (data) {
             if (data.success) {
-              console.log(data);
+              alert(data);
               // Update the like count displayed on the button
               const likeText = $(`#like-count-${post_id}`);
               likeText.text(data.like_count);
             } else {
-              console.log(data.error);
+              alert(data.error);
             }
           },
           error: function (xhr, errmsg, err) {
-            console.log("Error: " + xhr.status + ": " + xhr.responseText);
+            alert("Error: " + xhr.status + ": " + xhr.responseText);
           },
         });
       });
@@ -237,11 +237,11 @@
               const dislikeText = $(`#dislike-count-${post_id}`);
               dislikeText.text(data.dislike_count);
             } else {
-              console.log(data.error);
+              alert(data.error);
             }
           },
           error: function (xhr, errmsg, err) {
-            console.log("Error: " + xhr.status + ": " + xhr.responseText);
+            alert("Error: " + xhr.status + ": " + xhr.responseText);
           },
         });
       });

@@ -35,7 +35,7 @@
     }
 </style>
 <div class="container">
-    <a href="javascript:history.back()" type="button" class="btn btn-light ml-3 mb-4" > Go Back</a>
+    <a href="javascript:history.back()" type="button" class="btn btn-light ml-3 mb-4"> Go Back</a>
     <div class="card">
         <div class="card-body">
             <div class="d-flex flex-row justify-content-between">
@@ -49,20 +49,34 @@
             <!-- Display User's Followers -->
             <div class="d-flex flex-row">
                 Followers: {{follower_count}}
-            </div>  
+            </div>
 
-            
+
             <!-- Display Users the Current User is Following -->
             <div>
                 Following: {{following_count}}
             </div>
-            
+
             <h3>Posts:</h3>
             <div class="col-md-3">
                 {% if user_posts %} {% for post in user_posts %}
                 <div class="level-item has-text-centered "
                     style="background-color: lightgray; padding: 8px; margin-top: 5px; width: 500px;">
-                    <p style="font-size: 14px">Author: {{ post.author.username }}
+                    <p style="font-size: 14px;" class="d-flex flex-row justify-content-between ">
+                        <a href="{% url 'profile' post.author.id%}" class="align-content-center"
+                            style="font-size: larger;">
+                            <strong>
+                                {{ post.author.username | title}}
+                            </strong>
+                        </a>
+                        {% if user.is_authenticated %}
+                        {% if post.author == user %}
+                        <span>
+                            <a href="{% url 'post-delete' pk=post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-secondary btn-sm">Update</a>
+                        </span>
+                        {% endif %}
+                        {% endif %}
                     <p style="font-size: 14px">
                         {{ post.juza }} {{ post.surah }}, {{ post.reader }}
                     </p>
@@ -169,8 +183,8 @@
         <a type="button" href="{% url 'profile' user.id %}" class="btn btn-light ml-3">View Profile</a>
         <a class="nav-item nav-link" href="{% url 'site-user-logout' %}">{% load static %} <img
                 src="{% static 'user/media/logout.png' %}" width=30px height=30px</a>
-                {%else%}
-                <a type="button" href="{% url 'site-user-login'%}" class="btn btn-light ml-3">Login</a>
+            {%else%}
+            <a type="button" href="{% url 'site-user-login'%}" class="btn btn-light ml-3">Login</a>
             {% endif%}
     </nav>
 </header>
