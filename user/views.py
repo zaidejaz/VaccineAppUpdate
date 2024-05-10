@@ -59,6 +59,17 @@ def profile(request, id):
     # Get the user's posts
     user_posts = Post.objects.filter(author=user_data)
 
+    current_url = request.path
+    print(current_url)
+    # Get referer Url to go back
+    referring_url = request.META.get("HTTP_REFERER")
+
+    if referring_url is None:
+        referring_url="/homepage"
+    else:
+        if current_url in referring_url:
+            referring_url="/homepage"
+
     # Calculate the follower count and following count
     follower_count = Follower.objects.filter(user=user_data).count()
     following_count = Follower.objects.filter(follower=user_data).count()
@@ -74,6 +85,7 @@ def profile(request, id):
         'follows': follows,
         'follower_count': follower_count,
         'following_count': following_count,
+        'referrer_url': referring_url
     }
 
     return render(request, 'user/accounts/profile.html', context)
@@ -154,8 +166,9 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
     def get_success_url(self):
-        # Redirect to the updated post's detail page after a successful update
-        return reverse_lazy('post_detail', kwargs={'pk': self.object.pk})
+        # Get the referring URL from the request's headers
+        referrer_url = f'/profile/{self.request.user.id}'
+        return referrer_url
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
