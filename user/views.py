@@ -364,7 +364,7 @@ def post_form(request):
 @login_required
 def searchpage(request):
     query = request.GET.get('q', '')
-    results = Post.objects.filter(surah__icontains=query) | Post.objects.filter(reader__icontains=query)
+    results = Post.objects.filter(surah__icontains=query) | Post.objects.filter(reader__icontains=query) | Post.objects.filter(author__username__icontains=query)
     return render(request, 'user/searchpage.html', {'results': results, 'query': query, 'user': request.user})
 
 @login_required
