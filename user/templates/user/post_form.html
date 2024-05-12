@@ -1,5 +1,5 @@
 {% extends "user/base.html" %} {% load crispy_forms_tags %} {% block content %}
-<a href="javascript:history.back()" type="button" class="btn btn-light mb-4" > Go Back</a>
+<a href="/homepage" type="button" class="btn btn-light mb-4" > Go Back</a>
 <br>
 <a class="navbar-brand mr-4"
   >{% load static %} <img src="{% static "user/media/NewLogo_3.png" %}"
@@ -21,7 +21,6 @@
         <label for="juzSelector">Select Juz:</label>
         <select id="juzSelector" name="juz" class="form-control">
           <option value="1">Juz 1</option>
-          <option value="2">Juz 1-3</option>
           <option value="3">Juz 3</option>
           <option value="4">Juz 4</option>
           <option value="6">Juz 6</option>

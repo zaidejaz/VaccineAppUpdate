@@ -31,7 +31,7 @@
 {% block content %}
 <section class="section">
   <div class="container">
-    <a href="javascript:history.back()" type="button" class="btn btn-light ml-3 mb-4" > Go Back</a>
+    <a href="/homepage" type="button" class="btn btn-light ml-3 mb-4" > Go Back</a>
     <div class="columns">
       <div class="column is-offset-4 is-4">
         <h1 class="title">Record audio</h1>
@@ -53,7 +53,6 @@
                 <label for="juzSelector">Select Juz:</label>
                 <select id="juzSelector" name="juz" class="form-control">
                   <option value="1">Juz 1</option>
-                  <option value="2">Juz 1-3</option>
                   <option value="3">Juz 3</option>
                   <option value="4">Juz 4</option>
                   <option value="6">Juz 6</option>
@@ -141,6 +140,13 @@
 <script src="{% static 'assets/js/videojs.record.min.js' %}"></script>
 <script src="{% static 'assets/js/browser-workaround.js' %}"></script>
 <script src="{% static 'assets/js/real.recording.js' %}"></script>
+
+<script src=" https://cdn.jsdelivr.net/npm/video.js@8.12.0/dist/video.min.js "></script>
+<script src=" https://cdn.jsdelivr.net/npm/recordrtc@5.6.2/RecordRTC.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.1.4/adapter.min.js" integrity="sha512-FZkQmTcqSzV2aNpWszYA/pPUISx6QjI60lKGwnIsfNFCGqUB7gcobQ9StH3hQCKFN92md3fCaXLzzSpoFat57A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.4/wavesurfer.min.js" integrity="sha512-mhqErQ0f2UqnbsjgKpM96XfxVjVMnXpszEXKmnJk8467vR8h0MpiPauil8TKi5F5DldQGqNUO/XTyWbQku22LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-wavesurfer/2.3.1/videojs.wavesurfer.min.js" integrity="sha512-jfhFJ2KelKKB/a1QzYXUMNGXUPpWn2nDiqpWLNBGoLTgqkWQcM4hTXIe279B5SbU2pt5lk/7+J/E273IZWtXCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-record/4.8.0/videojs.record.min.js" integrity="sha512-RXJqHJU73lRwzWewH3BycKi4RUSJCNXzNEGmuSi4CNaVOvTXaYtflUp4R4AiydF/PBjeVOFbqc7ikDbnjypobA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
   // Surah data grouped by Juz
